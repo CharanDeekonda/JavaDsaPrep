@@ -1,0 +1,29 @@
+package com.wipro;
+import java.sql.*;
+import java.util.*;
+public class InsertEx {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+		Class.forName("oracle.jbc.driver.OracleDriver");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","charan","charan");
+		PreparedStatement ps=con.prepareStatement("insert into stu values(?,?,?)");
+		int flag=1;
+		Scanner sc=new Scanner(System.in);
+		while(flag) {
+			System.out.println("Enter Name:");
+			String name=sc.nextLine();
+			System.out.println("Enter RollNo:");
+			int roll=sc.nextInt();
+			System.out.println("Enter Marks:");
+			double marks=sc.nextDouble();
+		}
+		
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

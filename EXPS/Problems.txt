@@ -1,0 +1,111 @@
+input: "3[a]2[b]3[c]"
+output: "aaabbccc"
+
+--------------------------------------------
+
+(25|04|25)
+//Anagram char cnt for an array {"app","approx","apps","apple","ape"}
+int min=arr[0].length;
+int c=0;
+for(int i=0;i<arr.length;i++){
+if(arr[i].length()<min) min=arr[i].length;
+}
+for(int i=0;i<min;i++){
+char ch=arr[0].charAt(i);
+for(int j=1;j<arr.length;j++){
+if(arr[j].charAt(i)!=ch) return c;}
+c++
+}return c;
+
+//encryption-1
+// String enc="aaaaaabbfgwbbbcccccccc";
+static String encryption1(String str){
+    String ans="";
+    int c=1;
+    for(int i=0;i<str.length;i++){
+        if(i<str.length()-1 && str.charAt(i)==str.charAt(i+1)) c++;
+        else{
+            ans+=c;
+            ans+=str.charAt(i);
+            c=1;
+        }
+    }
+    return ans;
+}
+
+//encryption2
+static String encryption2(String str){
+    String ans="";
+    int n=Math.ceil(Math.sqrt(str.length()));
+    String arr[]=new String[n];
+    Arrays.fill("",arr);
+    for(int i=0;i<str.length();i++){
+        arr[i%n]+=str.charAt(i);
+    }
+    return String.join(" ",arr).trim();
+ }
+
+
+
+--------------------------------------------------------------------------
+
+
+Palindrome by removing one digit.
+
+public class PasswordFromStableUnstable {
+    
+    // Function to check if a number is stable
+    public static boolean isStable(int num) {
+        int[] freq = new int[10]; // To count digits 0-9
+
+        // Count digit frequencies
+        while (num > 0) {
+            int digit = num % 10;
+            freq[digit]++;
+            num /= 10;
+        }
+
+        // Find the first non-zero frequency
+        int baseFreq = 0;
+        for (int f : freq) {
+            if (f > 0) {
+                baseFreq = f;
+                break;
+            }
+        }
+
+        // Check if all non-zero frequencies are the same
+        for (int f : freq) {
+            if (f > 0 && f != baseFreq) {
+                return false;
+            }
+        }
+
+        return true; // All frequencies are equal → stable
+    }
+
+    // Function to calculate password
+    public static int getPassword(int input1, int input2, int input3, int input4, int input5) {
+        int[] inputs = {input1, input2, input3, input4, input5};
+        int stableSum = 0, unstableSum = 0;
+
+        for (int num : inputs) {
+            if (isStable(num)) {
+                stableSum += num;
+            } else {
+                unstableSum += num;
+            }
+        }
+
+        return stableSum - unstableSum;
+    }
+
+    // Sample test
+    public static void main(String[] args) {
+        int input1 = 12, input2 = 1313, input3 = 122, input4 = 678, input5 = 898;
+
+        int password = getPassword(input1, input2, input3, input4, input5);
+        System.out.println("Password = " + password); // Expected: 983
+    }
+}
+
